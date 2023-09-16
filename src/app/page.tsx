@@ -1,9 +1,16 @@
-import Image from "next/image";
+"use client";
+
+import useStoreUserEffect from "@/hooks/useStoreUserEffect";
+import { SignInButton } from "@clerk/clerk-react";
 
 export default function Home() {
+  const { userId, user } = useStoreUserEffect();
+  if (userId === null) {
+    return <SignInButton />;
+  }
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-12">
-      <h1 className="text-3xl"> Hello World</h1>
+    <main className="flex min-h-screen flex-col items-center p-12">
+      Hello, {user?.firstName}
     </main>
   );
 }
