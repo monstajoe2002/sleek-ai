@@ -15,7 +15,7 @@ export default function Navbar() {
       <Link
         href="/"
         className="scroll-m-20 text-4xl font-bold tracking-tight 
-      bg-clip-text bg-gradient-to-r text-transparent from-blue-500 to-blue-800 ">
+      bg-clip-text bg-gradient-to-r text-transparent from-blue-500 to-blue-800 my-auto ">
         Sleek
       </Link>
       {userId ? (
