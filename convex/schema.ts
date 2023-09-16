@@ -11,10 +11,7 @@ export default defineSchema({
     body: v.optional(v.string()),
     completed: v.boolean(),
     ocurrence: v.number(),
+    // embedding: v.array(v.float64()),
     date: v.string(),
-  }).vectorIndex("by_title", {
-    vectorField: "title",
-    dimensions: 1536,
-    filterFields: ["title"],
   }),
 });
