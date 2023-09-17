@@ -34,14 +34,14 @@ export default function Navbar() {
               <h4 className="font-medium leading-none mb-4">
                 Welcome, {user?.firstName}
               </h4>
-              <Button>
+              <Button asChild>
                 <SignOutButton />
               </Button>
             </PopoverContent>
           </Popover>
         </div>
       ) : (
-        <Button>
+        <Button asChild>
           <SignInButton />
         </Button>
       )}
