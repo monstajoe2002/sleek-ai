@@ -1,8 +1,6 @@
 "use client";
 
-import useStoreUserEffect from "@/hooks/useStoreUserEffect";
 import useWeekdays from "@/hooks/useWeekdays";
-import { SignInButton } from "@clerk/clerk-react";
 
 export default function Home() {
   const weekdays = useWeekdays();
