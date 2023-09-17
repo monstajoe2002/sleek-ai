@@ -12,9 +12,8 @@ export default function CreateTaskModal({ className }: Props) {
   return (
     <Dialog>
       <DialogTrigger>
-        <Button className={className}>
-          <Plus className="mr-1" />
-          New Task
+        <Button className="w-full mt-2" variant={"secondary"}>
+          <Plus className="h-4 w-4" />
         </Button>
       </DialogTrigger>
       <DialogContent>

@@ -21,7 +21,6 @@ export default function Navbar() {
       </Link>
       {userId ? (
         <div className="flex flex-row gap-2">
-          <CreateTaskModal className="my-auto mr-4" />
           <Popover>
             <PopoverTrigger>
               <Image
