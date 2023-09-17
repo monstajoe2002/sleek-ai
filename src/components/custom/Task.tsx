@@ -19,7 +19,7 @@ export default function Task({ title }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Card className="w-full p-4 mt-4 mb-6 cursor-pointer">
+        <Card className="w-full p-4 mt-4 mb-6 cursor-pointer hover:shadow-md transition-shadow">
           <CardDescription>{title}</CardDescription>
         </Card>
       </DialogTrigger>
