@@ -3,6 +3,12 @@
 import React from "react";
 import { Card, CardDescription } from "../ui/card";
 import { Id } from "@convex/_generated/dataModel";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 
 type Props = {
   id?: Id<"tasks">;
@@ -11,8 +17,17 @@ type Props = {
 
 export default function Task({ title }: Props) {
   return (
-    <Card className="w-full p-4 mt-4 mb-6">
-      <CardDescription>{title}</CardDescription>
-    </Card>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Card className="w-full p-4 mt-4 mb-6 cursor-pointer">
+          <CardDescription>{title}</CardDescription>
+        </Card>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogTitle>
+          Edit <span className="font-medium">{title}</span>
+        </DialogTitle>
+      </DialogContent>
+    </Dialog>
   );
 }
