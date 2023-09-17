@@ -6,6 +6,7 @@ import useStoreUserEffect from "@/hooks/useStoreUserEffect";
 import { SignInButton, SignOutButton } from "@clerk/clerk-react";
 import Image from "next/image";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import CreateTaskModal from "./CreateTaskModal";
 
 export default function Navbar() {
   const { userId, user } = useStoreUserEffect();
@@ -20,6 +21,7 @@ export default function Navbar() {
       </Link>
       {userId ? (
         <div className="flex flex-row gap-2">
+          <CreateTaskModal className="my-auto mr-4" />
           <Popover>
             <PopoverTrigger>
               <Image
