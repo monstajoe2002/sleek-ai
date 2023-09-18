@@ -8,9 +8,10 @@ import {
 } from "../ui/dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../ui/button";
-import { Plus } from "lucide-react";
+import { CalendarIcon, Plus } from "lucide-react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
+import { Calendar } from "../ui/calendar";
 import {
   Form,
   FormControl,
@@ -22,14 +23,21 @@ import {
 } from "@/components/ui/form";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
+import { cn } from "@/lib/utils";
+import { Popover, PopoverTrigger, PopoverContent } from "../ui/popover";
+import useWeekdays from "@/hooks/useWeekdays";
+import { useMutation } from "convex/react";
+import { api } from "@convex/_generated/api";
 const formSchema = z.object({
   title: z.string().min(1),
   description: z.string().optional(),
   occurence: z.number().min(1).max(7),
   completed: z.boolean(),
-  date: z.date().optional(),
+  date: z.array(z.date()),
 });
 export default function CreateTaskModal() {
+  const weekdays = useWeekdays();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -38,7 +46,7 @@ export default function CreateTaskModal() {
     },
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    // console.log(values);
   }
   return (
     <Dialog>
@@ -58,7 +66,7 @@ export default function CreateTaskModal() {
                 <FormItem>
                   <FormLabel>Title</FormLabel>
                   <FormControl>
-                    <Input required={true} {...field} />
+                    <Input required {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -92,6 +100,56 @@ export default function CreateTaskModal() {
                       onChange={(e) => field.onChange(e.target.valueAsNumber)}
                     />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="date"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>Day(s) of occurence</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant={"outline"}
+                          className={cn(
+                            "pl-3 text-left font-normal w-full",
+                            !field.value && "text-muted-foreground"
+                          )}>
+                          {field.value ? (
+                            field.value.map((date, index) => (
+                              <div key={date.toISOString()}>
+                                {new Intl.DateTimeFormat("en-US", {
+                                  weekday: "long",
+                                }).format(date)}
+                                {index < field.value.length - 1 && ", "}
+                              </div>
+                            ))
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="multiple"
+                        min={1}
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        disabled={(date) =>
+                          date > weekdays[weekdays.length - 1] ||
+                          date < weekdays[0]
+                        }
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+
                   <FormMessage />
                 </FormItem>
               )}
