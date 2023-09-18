@@ -33,9 +33,9 @@ const formSchema = z.object({
   description: z.string().optional(),
   occurence: z.number().min(1).max(7),
   completed: z.boolean(),
-  dates: z.array(z.date()),
+  date: z.string().optional(),
 });
-export default function CreateTaskModal() {
+export default function CreateTaskModal({ dueDate }: { dueDate: string }) {
   const {} = useWeekdays();
   const createTaskMutation = useMutation(api.tasks.createTask);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -51,7 +51,7 @@ export default function CreateTaskModal() {
     createTaskMutation({
       title: values.title,
       body: values.description,
-      date: values.dates.map((date) => date.toISOString()),
+      date: dueDate,
     });
   }
   return (

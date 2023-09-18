@@ -14,7 +14,7 @@ export default function Home() {
             {day}
           </h3>
           <Task title="New" />
-          <CreateTaskModal />
+          <CreateTaskModal dueDate={day} />
         </div>
       ))}
     </div>

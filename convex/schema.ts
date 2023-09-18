@@ -11,6 +11,6 @@ export default defineSchema({
     body: v.optional(v.string()),
     completed: v.boolean(),
     // embedding: v.array(v.float64()),
-    date: v.array(v.string()),
+    date: v.string(),
   }),
 });
