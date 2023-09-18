@@ -23,7 +23,7 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 
 import useWeekdays from "@/hooks/useWeekdays";
-import { useMutation } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
 import { Id } from "@convex/_generated/dataModel";
 
@@ -41,6 +41,7 @@ export default function EditTaskModal({
   taskId: Id<"tasks">;
 }) {
   const updateTaskMutation = useMutation(api.tasks.updateTask);
+  const task = useQuery(api.tasks.getTaskById, { id: taskId });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
@@ -62,6 +63,7 @@ export default function EditTaskModal({
               <FormField
                 control={form.control}
                 name="title"
+                defaultValue={task?.title}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Title</FormLabel>
@@ -75,6 +77,7 @@ export default function EditTaskModal({
               <FormField
                 control={form.control}
                 name="description"
+                defaultValue={task?.body}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Description</FormLabel>

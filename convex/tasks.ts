@@ -24,7 +24,10 @@ export const updateTask = mutation({
     body: v.optional(v.string()),
   },
   async handler(ctx, args) {
-    await ctx.db.patch(args.id, args);
+    await ctx.db.patch(args.id, {
+      title: args.title,
+      body: args.body,
+    });
   },
 });
 
@@ -40,5 +43,13 @@ export const deleteTask = mutation({
 export const getAllTasks = query({
   async handler(ctx) {
     return await ctx.db.query("tasks").collect();
+  },
+});
+export const getTaskById = query({
+  args: {
+    id: v.id("tasks"),
+  },
+  async handler(ctx, { id }) {
+    return await ctx.db.get(id);
   },
 });
