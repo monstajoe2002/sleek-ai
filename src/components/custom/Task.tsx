@@ -14,7 +14,7 @@ export default function Task({ title, id }: Props) {
   return (
     <EditTaskModal taskId={id}>
       <Card className="p-4 mt-4 mb-6 cursor-pointer hover:shadow-md transition-shadow">
-        <CardDescription>{title}</CardDescription>
+        <CardDescription className="text-base">{title}</CardDescription>
       </Card>
     </EditTaskModal>
   );

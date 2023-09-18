@@ -51,7 +51,7 @@ export default function CreateTaskModal({ dueDate }: { dueDate: string }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="w-full mt-2" variant={"secondary"} size="icon">
+        <Button className="w-full mt-5" variant={"secondary"} size="icon">
           <Plus className="h-4 w-4" />
         </Button>
       </DialogTrigger>
