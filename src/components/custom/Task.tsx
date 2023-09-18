@@ -10,6 +10,7 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import CreateTaskModal from "./CreateTaskModal";
+import EditTaskModal from "./EditTaskModal";
 
 type Props = {
   id?: Id<"tasks">;
@@ -18,20 +19,10 @@ type Props = {
 
 export default function Task({ title }: Props) {
   return (
-    <div className=" w-full flex flex-col justify-center">
-      <Dialog>
-        <DialogTrigger asChild>
-          <Card className="p-4 mt-4 mb-6 cursor-pointer hover:shadow-md transition-shadow">
-            <CardDescription>{title}</CardDescription>
-          </Card>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogTitle>
-            Edit <span className="font-medium">{title}</span>
-          </DialogTitle>
-        </DialogContent>
-      </Dialog>
-      <CreateTaskModal />
-    </div>
+    <EditTaskModal>
+      <Card className="p-4 mt-4 mb-6 cursor-pointer hover:shadow-md transition-shadow">
+        <CardDescription>{title}</CardDescription>
+      </Card>
+    </EditTaskModal>
   );
 }
