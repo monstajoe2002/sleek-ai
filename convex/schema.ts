@@ -12,6 +12,6 @@ export default defineSchema({
     completed: v.boolean(),
     ocurrence: v.number(),
     // embedding: v.array(v.float64()),
-    date: v.string(),
+    date: v.array(v.string()),
   }),
 });

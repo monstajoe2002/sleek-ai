@@ -5,7 +5,7 @@ export const createTask = mutation({
   args: {
     title: v.string(),
     body: v.optional(v.string()),
-    date: v.string(),
+    date: v.array(v.string()),
   },
   handler(ctx, args) {
     return ctx.db.insert("tasks", {
@@ -25,7 +25,7 @@ export const updateTask = mutation({
     body: v.optional(v.string()),
     completed: v.optional(v.boolean()),
     ocurrence: v.optional(v.number()),
-    date: v.optional(v.string()),
+    date: v.optional(v.array(v.string())),
   },
   async handler(ctx, args) {
     await ctx.db.patch(args.id, args);
