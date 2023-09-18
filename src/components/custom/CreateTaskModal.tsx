@@ -36,14 +36,14 @@ const formSchema = z.object({
   dates: z.array(z.date()),
 });
 export default function CreateTaskModal() {
-  const weekdays = useWeekdays();
+  const {} = useWeekdays();
   const createTaskMutation = useMutation(api.tasks.createTask);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       // occurence: 1,
       completed: false,
-      dates: [weekdays[0]],
+      // dates: [weekdays[0]],
     },
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -110,7 +110,7 @@ export default function CreateTaskModal() {
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="dates"
               render={({ field }) => (
@@ -159,7 +159,7 @@ export default function CreateTaskModal() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
             <Button type="submit">Submit</Button>
           </form>
         </Form>
