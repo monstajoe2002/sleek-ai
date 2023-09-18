@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export default function useWeekdays() {
-  const [weekDays, setWeekDays] = useState<Date[]>([]);
+  const [weekdays, setWeekdays] = useState<Date[]>([]);
 
   useEffect(() => {
     const today = new Date();
@@ -12,8 +12,22 @@ export default function useWeekdays() {
       date.setDate(today.getDate() + diff);
       return date;
     });
-    setWeekDays(days);
+    setWeekdays(days);
   }, []);
 
-  return weekDays;
+  const formattedWeekDays = weekdays.map((date) =>
+    new Intl.DateTimeFormat("en-US", {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+    }).format(date)
+  );
+  const today = weekdays
+    .find((date) => date.getDay() === new Date().getDay())
+    ?.toLocaleDateString("en-US", {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+    });
+  return { formattedWeekDays, today };
 }

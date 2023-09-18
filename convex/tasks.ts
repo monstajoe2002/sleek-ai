@@ -12,7 +12,6 @@ export const createTask = mutation({
       title: args.title,
       body: args.body,
       completed: false,
-      ocurrence: 1,
       date: args.date,
     });
   },
@@ -24,7 +23,6 @@ export const updateTask = mutation({
     title: v.optional(v.string()),
     body: v.optional(v.string()),
     completed: v.optional(v.boolean()),
-    ocurrence: v.optional(v.number()),
     date: v.optional(v.string()),
   },
   async handler(ctx, args) {

@@ -10,7 +10,6 @@ export default defineSchema({
     title: v.string(),
     body: v.optional(v.string()),
     completed: v.boolean(),
-    ocurrence: v.number(),
     // embedding: v.array(v.float64()),
     date: v.string(),
   }),
