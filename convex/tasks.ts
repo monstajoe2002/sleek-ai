@@ -22,8 +22,6 @@ export const updateTask = mutation({
     id: v.id("tasks"),
     title: v.optional(v.string()),
     body: v.optional(v.string()),
-    completed: v.optional(v.boolean()),
-    date: v.optional(v.string()),
   },
   async handler(ctx, args) {
     await ctx.db.patch(args.id, args);
