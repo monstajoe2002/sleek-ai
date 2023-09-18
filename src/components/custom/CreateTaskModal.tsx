@@ -33,20 +33,26 @@ const formSchema = z.object({
   description: z.string().optional(),
   occurence: z.number().min(1).max(7),
   completed: z.boolean(),
-  date: z.array(z.date()),
+  dates: z.array(z.date()),
 });
 export default function CreateTaskModal() {
   const weekdays = useWeekdays();
-
+  const createTaskMutation = useMutation(api.tasks.createTask);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      occurence: 1,
+      // occurence: 1,
       completed: false,
+      dates: [weekdays[0]],
     },
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
     // console.log(values);
+    createTaskMutation({
+      title: values.title,
+      body: values.description,
+      date: values.dates.map((date) => date.toISOString()),
+    });
   }
   return (
     <Dialog>
@@ -106,7 +112,7 @@ export default function CreateTaskModal() {
             />
             <FormField
               control={form.control}
-              name="date"
+              name="dates"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Day(s) of occurence</FormLabel>
@@ -121,7 +127,7 @@ export default function CreateTaskModal() {
                           )}>
                           {field.value ? (
                             field.value.map((date, index) => (
-                              <div key={date.toISOString()}>
+                              <div key={date?.toISOString()}>
                                 {new Intl.DateTimeFormat("en-US", {
                                   weekday: "long",
                                 }).format(date)}
