@@ -3,13 +3,6 @@
 import React from "react";
 import { Card, CardDescription } from "../ui/card";
 import { Id } from "@convex/_generated/dataModel";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog";
-import CreateTaskModal from "./CreateTaskModal";
 import EditTaskModal from "./EditTaskModal";
 
 type Props = {

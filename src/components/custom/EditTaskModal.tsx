@@ -5,7 +5,6 @@ import {
   DialogTitle,
 } from "../ui/dialog";
 import React from "react";
-import { Card, CardDescription } from "../ui/card";
 
 export default function EditTaskModal({
   children,

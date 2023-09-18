@@ -8,14 +8,12 @@ import {
 } from "../ui/dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../ui/button";
-import { CalendarIcon, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import { Calendar } from "../ui/calendar";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -23,8 +21,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
-import { cn } from "@/lib/utils";
-import { Popover, PopoverTrigger, PopoverContent } from "../ui/popover";
+
 import useWeekdays from "@/hooks/useWeekdays";
 import { useMutation } from "convex/react";
 import { api } from "@convex/_generated/api";
