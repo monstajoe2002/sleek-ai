@@ -31,7 +31,6 @@ export default function Task({ title }: Props) {
           </DialogTitle>
         </DialogContent>
       </Dialog>
-      <CreateTaskModal />
     </div>
   );
 }

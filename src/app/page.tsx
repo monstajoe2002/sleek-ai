@@ -1,5 +1,6 @@
 "use client";
 
+import CreateTaskModal from "@/components/custom/CreateTaskModal";
 import Task from "@/components/custom/Task";
 import useWeekdays from "@/hooks/useWeekdays";
 
@@ -13,6 +14,7 @@ export default function Home() {
             {day}
           </h3>
           <Task title="New" />
+          <CreateTaskModal />
         </div>
       ))}
     </div>
