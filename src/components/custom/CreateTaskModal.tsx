@@ -31,8 +31,8 @@ const formSchema = z.object({
   completed: z.boolean(),
   date: z.string().optional(),
 });
+
 export default function CreateTaskModal({ dueDate }: { dueDate: string }) {
-  const {} = useWeekdays();
   const createTaskMutation = useMutation(api.tasks.createTask);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

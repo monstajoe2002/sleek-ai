@@ -6,11 +6,11 @@ import { Id } from "@convex/_generated/dataModel";
 import EditTaskModal from "./EditTaskModal";
 
 type Props = {
-  id?: Id<"tasks">;
+  id: Id<"tasks">;
   title: string;
 };
 
-export default function Task({ title }: Props) {
+export default function Task({ title, id }: Props) {
   return (
     <EditTaskModal>
       <Card className="p-4 mt-4 mb-6 cursor-pointer hover:shadow-md transition-shadow">
