@@ -9,11 +9,12 @@ export default function ThemeToggle() {
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
+  function toggleTheme() {
+    theme === "dark" ? setTheme("light") : setTheme("dark");
+  }
+
   return (
-    <Button
-      onClick={() => (theme === "dark" ? setTheme("light") : setTheme("dark"))}
-      variant={"outline"}
-      className="my-auto">
+    <Button onClick={toggleTheme} variant={"outline"} className="my-auto">
       {theme === "dark" ? (
         <Sun className="w-4 h-4" />
       ) : (
