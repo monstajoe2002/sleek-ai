@@ -60,6 +60,7 @@ export default function CreateTaskModal() {
                   <FormControl>
                     <Input required={true} {...field} />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -72,6 +73,7 @@ export default function CreateTaskModal() {
                   <FormControl>
                     <Textarea {...field} />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -82,8 +84,15 @@ export default function CreateTaskModal() {
                 <FormItem>
                   <FormLabel>Number of days</FormLabel>
                   <FormControl>
-                    <Input type="number" max={7} min={1} {...field} />
+                    <Input
+                      type="number"
+                      min={1}
+                      max={7}
+                      {...field}
+                      onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                    />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
