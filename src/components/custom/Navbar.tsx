@@ -8,6 +8,7 @@ import Image from "next/image";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import CreateTaskModal from "./CreateTaskModal";
 import ThemeToggle from "./ThemeToggle";
+import { Avatar, AvatarImage } from "../ui/avatar";
 
 export default function Navbar() {
   const { userId, user } = useStoreUserEffect();
@@ -25,13 +26,9 @@ export default function Navbar() {
           <div className="flex flex-row gap-2">
             <Popover>
               <PopoverTrigger>
-                <Image
-                  src={user!.imageUrl}
-                  width={50}
-                  height={50}
-                  className="rounded-full"
-                  alt="profile pic"
-                />
+                <Avatar>
+                  <AvatarImage src={user!.imageUrl} />
+                </Avatar>
               </PopoverTrigger>
               <PopoverContent className="flex flex-col w-fit gap-2 mt-2">
                 <h4 className="font-medium leading-none mb-4">
