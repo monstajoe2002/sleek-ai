@@ -30,7 +30,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (!tasks) {
+    if (!tasks && !getTasksQuery) {
       setIsLoading(true);
     }
     setTasks(getTasksQuery);

@@ -22,6 +22,7 @@ type Props = {
 export default function Task({ title, id, index }: Props) {
   const deleteTaskMutation = useMutation(api.tasks.deleteTask);
   const deleteTask = () => {
+    if (!confirm("Are you sure you want to delete this task?")) return;
     deleteTaskMutation({ id });
   };
   return (
@@ -41,7 +42,8 @@ export default function Task({ title, id, index }: Props) {
           </ContextMenuTrigger>
           <ContextMenuContent>
             <ContextMenuItem
-              className="focus:bg-red-100 focus:text-red-600 text-red-600"
+              className="focus:bg-red-100 focus:text-red-600 text-red-600 dark:focus:bg-red-600 
+              dark:focus:bg-opacity-50 dark:focus:text-red-100"
               onClick={deleteTask}>
               <Trash className="h-4 w-4 mr-2" />
               Delete
