@@ -30,6 +30,8 @@ export const generate = internalAction({
                 }
             ]
             Note that there may be more than one task in that array, this is just an example.
+            Do not include the date as is in the example, use the date that the user inputed. 
+            Look for keywords like tomorrow and today to help you organize the tasks.
         `;
 
     const result = await client.generateText({

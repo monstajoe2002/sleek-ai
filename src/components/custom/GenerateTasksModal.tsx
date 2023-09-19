@@ -8,7 +8,7 @@ import {
 } from "../ui/dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../ui/button";
-import { Plus, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import {
@@ -16,10 +16,8 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import useWeekdays from "../../hooks/useWeekdays";
 import { useAction } from "convex/react";
@@ -43,6 +41,7 @@ export default function GenerateTasksModal() {
       userId: userId as Id<"users">,
     });
   }
+
   return (
     <Dialog>
       <DialogTrigger asChild>

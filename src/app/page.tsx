@@ -20,7 +20,6 @@ export default function Home() {
     userId: (userId as string) ?? "",
   });
   const dndMutation = useMutation(api.tasks.dragAndDrop);
-  const [tasks, setTasks] = useState<typeof getTasksQuery>([]);
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) return;
     dndMutation({
@@ -30,12 +29,11 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (!tasks && !getTasksQuery) {
-      setIsLoading(true);
+    setIsLoading(true);
+    if (getTasksQuery && userId) {
+      setIsLoading(false);
     }
-    setTasks(getTasksQuery);
-    setIsLoading(false);
-  }, [tasks, getTasksQuery]);
+  }, [getTasksQuery, userId]);
   return (
     <SignedIn>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -51,7 +49,7 @@ export default function Home() {
                     {isLoading ? (
                       <Skeleton className="p-4 mt-4 mb-6 w-full h-[50px]" />
                     ) : (
-                      tasks?.map((task, i) => {
+                      getTasksQuery?.map((task, i) => {
                         if (task.date === day) {
                           return (
                             <Task
