@@ -1,6 +1,5 @@
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
-
+import { action, mutation, query } from "./_generated/server";
 export const createTask = mutation({
   args: {
     title: v.string(),
@@ -41,12 +40,6 @@ export const deleteTask = mutation({
     await ctx.db.delete(id);
   },
 });
-
-export const getAllTasks = query({
-  async handler(ctx) {
-    return await ctx.db.query("tasks").collect();
-  },
-});
 export const getTaskById = query({
   args: {
     id: v.id("tasks"),
@@ -76,5 +69,17 @@ export const getTasksByUserId = query({
       .query("tasks")
       .filter((q) => q.eq(q.field("userId"), userId))
       .collect();
+  },
+});
+
+export const toggleTask = mutation({
+  args: {
+    id: v.id("tasks"),
+  },
+  async handler(ctx, { id }) {
+    const task = await ctx.db.get(id);
+    await ctx.db.patch(id, {
+      completed: !task?.completed,
+    });
   },
 });

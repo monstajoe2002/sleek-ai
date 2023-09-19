@@ -57,6 +57,7 @@ export default function Home() {
                               key={task._id}
                               title={task.title}
                               id={task._id}
+                              completed={task.completed}
                             />
                           );
                         }
