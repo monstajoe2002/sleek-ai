@@ -7,6 +7,7 @@ import { SignInButton, SignOutButton } from "@clerk/clerk-react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import ThemeToggle from "./ThemeToggle";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import GenerateTasksModal from "./GenerateTasksModal";
 
 export default function Navbar() {
   const { userId, user } = useStoreUserEffect();
@@ -22,6 +23,7 @@ export default function Navbar() {
       <div className="flex-row flex justify-between gap-4">
         {userId ? (
           <div className="flex flex-row gap-2">
+            <GenerateTasksModal />
             <Popover>
               <PopoverTrigger>
                 <Avatar>
