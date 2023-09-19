@@ -41,23 +41,3 @@ export const store = mutation({
     });
   },
 });
-
-// export const getLoggedInUser = query({
-//   args: {},
-//   handler: async (ctx) => {
-//     const identity = await ctx.auth.getUserIdentity();
-//     if (!identity) {
-//       return null;
-//     }
-//     const user = await ctx.db
-//       .query("users")
-//       .withIndex("by_token", (q) =>
-//         q.eq("tokenIdentifier", identity.tokenIdentifier)
-//       )
-//       .unique();
-//     if (!user) {
-//       return null;
-//     }
-//     return user;
-//   },
-// });

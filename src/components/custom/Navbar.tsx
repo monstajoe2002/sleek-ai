@@ -4,9 +4,7 @@ import React from "react";
 import { Button } from "../ui/button";
 import useStoreUserEffect from "@/hooks/useStoreUserEffect";
 import { SignInButton, SignOutButton } from "@clerk/clerk-react";
-import Image from "next/image";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import CreateTaskModal from "./CreateTaskModal";
 import ThemeToggle from "./ThemeToggle";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 

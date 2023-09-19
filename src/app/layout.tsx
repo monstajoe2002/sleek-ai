@@ -1,3 +1,4 @@
+"use client";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -5,6 +6,7 @@ import ConvexClientProvider from "./ConvexClientProvider";
 import Link from "next/link";
 import Navbar from "@/components/custom/Navbar";
 import { ThemeProvider } from "./ThemeProvider";
+import { RedirectToSignIn, SignedOut } from "@clerk/clerk-react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,6 +33,9 @@ export default function RootLayout({
               <Navbar />
               {children}
             </main>
+            <SignedOut>
+              <RedirectToSignIn />
+            </SignedOut>
           </ThemeProvider>
         </ConvexClientProvider>
       </body>
