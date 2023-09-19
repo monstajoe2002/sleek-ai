@@ -31,7 +31,7 @@ export default function Task({ title, id, index }: Props) {
           <ContextMenuTrigger>
             <EditTaskModal taskId={id}>
               <Card
-                className="p-4 mt-4 mb-6 cursor-pointer hover:shadow-md transition-shadow"
+                className="p-4 mt-4 mb-2 cursor-pointer hover:shadow-md transition-shadow"
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}>
