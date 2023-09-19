@@ -29,11 +29,11 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (!getTasksQuery) {
-      setIsLoading(true);
+    setIsLoading(true);
+    if (getTasksQuery && userId) {
+      setIsLoading(false);
     }
-    setIsLoading(false);
-  }, [getTasksQuery]);
+  }, [getTasksQuery, userId]);
   return (
     <SignedIn>
       <DragDropContext onDragEnd={onDragEnd}>
