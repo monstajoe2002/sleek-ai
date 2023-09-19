@@ -22,7 +22,8 @@ export const generate = internalAction({
         ${args.userPrompt}.
         Try to organize your tasks in a way that makes sense to you. If the user inputes different days of the week, 
         use them in the output. Also avoid assigning too many tasks on one day.
-        After you have organized your tasks, return the output in a JSON array as such:
+        After you have organized your tasks, return the output in a JSON array as such.
+        DO NOT copy the data as-is, but rather use the data to generate your own output:
             [
                 {
                     "title": "task 1",
@@ -30,7 +31,7 @@ export const generate = internalAction({
                 }
             ]
             Note that there may be more than one task in that array, this is just an example.
-            Do not include the date as is in the example, use the date that the user inputed. 
+            
             Look for keywords like tomorrow and today to help you organize the tasks.
         `;
 
