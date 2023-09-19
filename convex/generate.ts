@@ -29,6 +29,7 @@ export const generate = internalAction({
                     "date":"Tuesday, September 19"
                 }
             ]
+            Note that there may be more than one task in that array, this is just an example.
         `;
 
     const result = await client.generateText({

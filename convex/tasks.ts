@@ -103,10 +103,12 @@ export const generateTasks = action({
       date: string;
       userId: string;
     }> = JSON.parse(cleanedString);
-    await ctx.runMutation(api.tasks.createTask, {
-      title: tasks[0].title,
-      date: tasks[0].date,
-      userId,
+    tasks.forEach(async (task) => {
+      await ctx.runMutation(api.tasks.createTask, {
+        title: task.title,
+        date: task.date,
+        userId,
+      });
     });
   },
 });
