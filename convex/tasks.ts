@@ -1,6 +1,12 @@
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
-
+import {
+  action,
+  internalAction,
+  internalMutation,
+  mutation,
+  query,
+} from "./_generated/server";
+import { api, internal } from "./_generated/api";
 export const createTask = mutation({
   args: {
     title: v.string(),
@@ -76,5 +82,30 @@ export const getTasksByUserId = query({
       .query("tasks")
       .filter((q) => q.eq(q.field("userId"), userId))
       .collect();
+  },
+});
+
+export const generateTasks = action({
+  args: {
+    userPrompt: v.string(),
+    date: v.string(),
+    userId: v.id("users"),
+  },
+  async handler(ctx, { date, userPrompt, userId }) {
+    const res = (await ctx.runAction(internal.generate.generate, {
+      userPrompt,
+      date,
+    })) as string;
+    const tasks: Array<{
+      body?: string;
+      title: string;
+      date: string;
+      userId: string;
+    }> = JSON.parse(res);
+    await ctx.runMutation(api.tasks.createTask, {
+      title: tasks[0].title,
+      date: tasks[0].date,
+      userId,
+    });
   },
 });

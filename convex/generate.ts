@@ -37,6 +37,6 @@ export const generate = internalAction({
         text: prompt,
       },
     });
-    return JSON.parse(result[0].candidates![0].output as string);
+    return result[0].candidates![0].output;
   },
 });
