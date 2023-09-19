@@ -16,9 +16,13 @@ export default function ThemeToggle() {
   return (
     <Button onClick={toggleTheme} variant={"outline"} className="my-auto">
       {theme === "dark" ? (
-        <Sun className="w-4 h-4" />
+        <>
+          <Sun className="w-4 h-4 mr-2" /> Light
+        </>
       ) : (
-        <Moon className="w-4 h-4" />
+        <>
+          <Moon className="w-4 h-4 mr-2" /> Dark
+        </>
       )}
     </Button>
   );

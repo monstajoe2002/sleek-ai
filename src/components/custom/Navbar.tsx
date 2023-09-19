@@ -21,8 +21,6 @@ export default function Navbar() {
         Sleek
       </Link>
       <div className="flex-row flex justify-between gap-4">
-        <ThemeToggle />
-
         {userId ? (
           <div className="flex flex-row gap-2">
             <Popover>
@@ -35,10 +33,12 @@ export default function Navbar() {
                   alt="profile pic"
                 />
               </PopoverTrigger>
-              <PopoverContent>
+              <PopoverContent className="flex flex-col w-fit gap-2 mt-2">
                 <h4 className="font-medium leading-none mb-4">
                   Welcome, {user?.firstName}
                 </h4>
+                <ThemeToggle />
+
                 <Button asChild>
                   <SignOutButton />
                 </Button>
