@@ -53,3 +53,14 @@ export const getTaskById = query({
     return await ctx.db.get(id);
   },
 });
+export const dragAndDrop = mutation({
+  args: {
+    id: v.id("tasks"),
+    date: v.string(),
+  },
+  handler(ctx, args) {
+    return ctx.db.patch(args.id, {
+      date: args.date,
+    });
+  },
+});
