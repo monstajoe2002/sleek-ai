@@ -25,6 +25,8 @@ import { Textarea } from "../ui/textarea";
 import useWeekdays from "@/hooks/useWeekdays";
 import { useMutation } from "convex/react";
 import { api } from "@convex/_generated/api";
+import useStoreUserEffect from "@/hooks/useStoreUserEffect";
+import { Id } from "@convex/_generated/dataModel";
 const formSchema = z.object({
   title: z.string().min(1),
   description: z.string().optional(),
@@ -34,6 +36,7 @@ const formSchema = z.object({
 
 export default function CreateTaskModal({ dueDate }: { dueDate: string }) {
   const createTaskMutation = useMutation(api.tasks.createTask);
+  const { userId } = useStoreUserEffect();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,6 +49,7 @@ export default function CreateTaskModal({ dueDate }: { dueDate: string }) {
       title: values.title,
       body: values.description,
       date: dueDate,
+      userId: userId as Id<"users">,
     });
   }
   return (

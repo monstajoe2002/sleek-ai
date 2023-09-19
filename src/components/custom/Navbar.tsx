@@ -8,7 +8,7 @@ import Image from "next/image";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import CreateTaskModal from "./CreateTaskModal";
 import ThemeToggle from "./ThemeToggle";
-import { Avatar, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 export default function Navbar() {
   const { userId, user } = useStoreUserEffect();
@@ -27,15 +27,18 @@ export default function Navbar() {
             <Popover>
               <PopoverTrigger>
                 <Avatar>
-                  <AvatarImage src={user!.imageUrl} />
+                  <AvatarImage src={user?.imageUrl} />
+                  <AvatarFallback>
+                    {user?.emailAddresses[0].toString()}
+                  </AvatarFallback>
                 </Avatar>
               </PopoverTrigger>
               <PopoverContent className="flex flex-col w-fit gap-2 mt-2">
                 <h4 className="font-medium leading-none mb-4">
-                  Welcome, {user?.firstName}
+                  Welcome,{" "}
+                  {user?.firstName ?? user?.emailAddresses[0].toString()}
                 </h4>
                 <ThemeToggle />
-
                 <Button asChild>
                   <SignOutButton />
                 </Button>

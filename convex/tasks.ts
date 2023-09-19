@@ -6,6 +6,7 @@ export const createTask = mutation({
     title: v.string(),
     body: v.optional(v.string()),
     date: v.string(),
+    userId: v.id("users"),
   },
   handler(ctx, args) {
     return ctx.db.insert("tasks", {
@@ -13,6 +14,7 @@ export const createTask = mutation({
       body: args.body,
       completed: false,
       date: args.date,
+      userId: args.userId,
     });
   },
 });
@@ -62,5 +64,17 @@ export const dragAndDrop = mutation({
     return ctx.db.patch(args.id, {
       date: args.date,
     });
+  },
+});
+
+export const getTasksByUserId = query({
+  args: {
+    userId: v.string(),
+  },
+  async handler(ctx, { userId }) {
+    return await ctx.db
+      .query("tasks")
+      .filter((q) => q.eq(q.field("userId"), userId))
+      .collect();
   },
 });

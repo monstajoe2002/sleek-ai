@@ -3,7 +3,8 @@ import { v } from "convex/values";
 
 export default defineSchema({
   users: defineTable({
-    name: v.string(),
+    name: v.optional(v.string()),
+    email: v.optional(v.string()),
     tokenIdentifier: v.string(),
   }).index("by_token", ["tokenIdentifier"]),
   tasks: defineTable({
@@ -12,5 +13,6 @@ export default defineSchema({
     completed: v.boolean(),
     // embedding: v.array(v.float64()),
     date: v.string(),
+    userId: v.string(),
   }),
 });

@@ -3,6 +3,7 @@
 import CreateTaskModal from "@/components/custom/CreateTaskModal";
 import Task from "@/components/custom/Task";
 import { Skeleton } from "@/components/ui/skeleton";
+import useStoreUserEffect from "@/hooks/useStoreUserEffect";
 import useWeekdays from "@/hooks/useWeekdays";
 import { api } from "@convex/_generated/api";
 import { Id } from "@convex/_generated/dataModel";
@@ -13,8 +14,12 @@ import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const { formattedWeekDays, today } = useWeekdays();
-  const getTasksQuery = useQuery(api.tasks.getAllTasks);
+  const { userId } = useStoreUserEffect();
+  const getTasksQuery = useQuery(api.tasks.getTasksByUserId, {
+    userId: (userId as string) ?? "",
+  });
   const dndMutation = useMutation(api.tasks.dragAndDrop);
+  const [tasks, setTasks] = useState<typeof getTasksQuery>([]);
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) return;
     dndMutation({
@@ -25,9 +30,8 @@ export default function Home() {
 
   useEffect(() => {
     setIsLoading(true);
-    if (getTasksQuery) {
-      setIsLoading(false);
-    }
+    setTasks(getTasksQuery);
+    setIsLoading(false);
   }, [getTasksQuery]);
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -43,7 +47,7 @@ export default function Home() {
                   {isLoading ? (
                     <Skeleton className="p-4 mt-4 mb-6 w-full h-[50px]" />
                   ) : (
-                    getTasksQuery?.map((task, i) => {
+                    tasks?.map((task, i) => {
                       if (task.date === day) {
                         return (
                           <Task
