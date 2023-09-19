@@ -96,12 +96,13 @@ export const generateTasks = action({
       userPrompt,
       date,
     })) as string;
+    const cleanedString = res.replace(/^```json\s+/, "").replace(/\s+```$/, "");
     const tasks: Array<{
       body?: string;
       title: string;
       date: string;
       userId: string;
-    }> = JSON.parse(res);
+    }> = JSON.parse(cleanedString);
     await ctx.runMutation(api.tasks.createTask, {
       title: tasks[0].title,
       date: tasks[0].date,
