@@ -19,8 +19,10 @@ export const generate = internalAction({
   async handler(ctx, args) {
     const prompt = `
         Oragnize tasks into a weekly planner for the week of ${args.date} with the following prompt:
-        ${args.userPrompt}
-            After you have organized your tasks, return the output in a JSON array as such:
+        ${args.userPrompt}.
+        Try to organize your tasks in a way that makes sense to you. If the user inputes different days of the week, 
+        use them in the output. Also avoid assigning too many tasks on one day.
+        After you have organized your tasks, return the output in a JSON array as such:
             [
                 {
                     "title": "task 1",
@@ -35,6 +37,6 @@ export const generate = internalAction({
         text: prompt,
       },
     });
-    return result[0].candidates![0].output;
+    return JSON.parse(result[0].candidates![0].output as string);
   },
 });
