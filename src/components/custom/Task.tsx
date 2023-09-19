@@ -12,15 +12,21 @@ import { Trash } from "lucide-react";
 import { api } from "@convex/_generated/api";
 import { useMutation } from "convex/react";
 import { Draggable } from "react-beautiful-dnd";
+import { Checkbox } from "../ui/checkbox";
 
 type Props = {
   id: Id<"tasks">;
   title: string;
   index: number;
+  completed: boolean;
 };
 
-export default function Task({ title, id, index }: Props) {
+export default function Task({ title, id, index, completed }: Props) {
   const deleteTaskMutation = useMutation(api.tasks.deleteTask);
+  const toggleTaskMutation = useMutation(api.tasks.toggleTask);
+  function toggleTask() {
+    toggleTaskMutation({ id });
+  }
   const deleteTask = () => {
     if (!confirm("Are you sure you want to delete this task?")) return;
     deleteTaskMutation({ id });
@@ -36,7 +42,16 @@ export default function Task({ title, id, index }: Props) {
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}>
-                <CardDescription className="text-base">{title}</CardDescription>
+                <CardDescription className="text-base">
+                  <Checkbox
+                    className="mr-2"
+                    onCheckedChange={toggleTask}
+                    checked={completed}
+                  />
+                  <span className={completed ? "line-through" : ""}>
+                    {title}
+                  </span>
+                </CardDescription>
               </Card>
             </EditTaskModal>
           </ContextMenuTrigger>
